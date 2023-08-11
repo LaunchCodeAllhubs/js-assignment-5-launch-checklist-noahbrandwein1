@@ -15,6 +15,11 @@ window.addEventListener("load", function () {
     })
 
     const launchForm = document.querySelector('#launchForm');
+    const shuttleStatus = document.querySelector('#launchStatus');
+    const pilotStatus = document.querySelector('#pilotStatus');
+    const copilotStatus = document.querySelector('#copilotStatus');
+    const fuelStatus = document.querySelector('#fuelStatus');
+    const cargoStatus = document.querySelector('#cargoStatus');
 
     launchForm.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -39,13 +44,38 @@ window.addEventListener("load", function () {
 
         if (fuelLevel < 10000 || cargoMass > 10000) {
             shuttleStatus.innerHTML = 'Shuttle not ready for launch';
-            launchStatus.style.color = 'red';
-            launchStatus.innerHTML = 'Missoin aborted';
+            shuttleStatus.style.color = 'red';
+            pilotStatus.innerHTML = 'Pilot Ready';
+            copilotStatus.innerHTML = 'Co-pilot Ready';
+            fuelStatus.innerHTML = 'Fuel level high enough for launch';
+            cargoStatus.innerHTML = 'Cargo mass low enough for launch';
         } else {
             shuttleStatus.innerHTML = 'Shuttle is ready for launch';
-            launchStatus.style.color = 'green';
-            launchStatus.innerHTML = 'Mission success';
+            shuttleStatus.style.color = 'green';
+            pilotStatus.innerHTML = `Pilot ${pilotName} Ready`;
+            copilotStatus.innerHTML = `Co-pilot ${coPilotName} Ready`;
+            fuelStatus.innerHTML = 'Fuel level high enough for launch';
+            cargoStatus.innerHTML = 'Cargo mass low enough for launch';
         }
     })
+
+    function pickPlanet(planets) {
+        const missionTarget = document.querySelector('#missionTarget');
+        
+        const randomIndex = Math.floor(Math.random() * planets.length);
+        const selectedPlanet = planets[randomIndex];
+
+        missionTarget.innerHTML = `
+        <h2>Mission Destination</h2>
+        <ol>
+            <li>Name: ${selectedPlanet.name}</li>
+            <li>Diameter: ${selectedPlanet.diameter}</li>
+            <li>Star: ${selectedPlanet.star}</li>
+            <li>Distance from Earth: ${selectedPlanet.distance}</li>
+            <li>Number of Moons: ${selectedPlanet.moons}</li>
+        </ol>
+        <img src="${selectedPlanet.image}" alt="Mission Destination Image">
+    `;
+    }
 
 });
