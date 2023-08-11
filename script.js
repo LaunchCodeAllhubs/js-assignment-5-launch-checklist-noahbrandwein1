@@ -34,5 +34,18 @@ window.addEventListener("load", function () {
             return;
         }
 
+        const shuttleStatus = document.querySelector('#shuttleStatus');
+        const launchStatus = document.querySelector('#launchStatus');
+
+        if (fuelLevel < 10000 || cargoMass > 10000) {
+            shuttleStatus.innerHTML = 'Shuttle not ready for launch';
+            launchStatus.style.color = 'red';
+            launchStatus.innerHTML = 'Missoin aborted';
+        } else {
+            shuttleStatus.innerHTML = 'Shuttle is ready for launch';
+            launchStatus.style.color = 'green';
+            launchStatus.innerHTML = 'Mission success';
+        }
     })
+
 });
