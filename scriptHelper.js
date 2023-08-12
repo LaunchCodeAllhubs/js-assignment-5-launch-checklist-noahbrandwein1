@@ -41,17 +41,16 @@ function formSubmission(document, list, pilot, coPilot, fuelLevel, cargoLevel) {
             shuttleStatus.innerHTML = 'Shuttle not ready for launch';
             shuttleStatus.style.color = 'red';
         } else {
-            
+
         }
     }
 
 
 
 async function myFetch() {
-    let planetsReturned;
-
-    planetsReturned = await fetch().then(function (response) {
-    });
+    const url = 'https://handlers.education.launchcode.org/static/planets.json';
+    const response = await fetch(url);
+    const planetsReturned = await response.json();
 
     return planetsReturned;
 }
