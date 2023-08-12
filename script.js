@@ -1,6 +1,4 @@
-// Write your JavaScript code here!
 
-const { myFetch } = require("./scriptHelper");
 
 window.addEventListener("load", function () {
 
@@ -27,7 +25,7 @@ const cargoStatus = document.querySelector('#cargoStatus');
 launchForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const pilotName = document.querySelector('#pilotName').value;
+    const pilotName = document.querySelector('pilotName').value;
     const coPilotName = document.querySelector('[name="copilotName"]').value;
     const fuelLevel = document.querySelector('[name= "fuelLevel"]').value;
     const cargoMass = document.querySelector('[name= "cargoMass"]').value;

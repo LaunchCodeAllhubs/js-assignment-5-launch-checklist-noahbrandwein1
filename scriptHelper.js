@@ -2,18 +2,20 @@
 require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
+    const missionTarget = document.querySelector('#missionTarget');
     // Here is the HTML formatting for our mission target div.
-    /*
-                 <h2>Mission Destination</h2>
-                 <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
-                     <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
-                 </ol>
-                 <img src="">
-    */
+
+    missionTarget.innerHTML = `
+        <h2>Mission Destination</h2>
+        <ol>
+            <li>Name: ${name}</li>
+            <li>Diameter: ${diameter}</li>
+            <li>Star: ${star}</li>
+            <li>Distance from Earth: ${distance}</li>
+            <li>Number of Moons: ${moons}</li>
+        </ol>
+        <img src="${imageUrl}" alt="Mission Destination Image">
+    `;
 }
 
 function validateInput(testInput) {
@@ -31,7 +33,7 @@ function validateInput(testInput) {
 
 
 function formSubmission(document, list, pilot, coPilot, fuelLevel, cargoLevel) {
-    const pilotValidation = validateInput(pilot);
+        const pilotValidation = validateInput(pilot);
         const coPilotValidation = validateInput(coPilot);
         const fuelValidation = validateInput(fuelLevel);
         const cargoValidation = validateInput(cargoLevel);
@@ -56,6 +58,8 @@ async function myFetch() {
 }
 
 function pickPlanet(planets) {
+    const randomIndex = Math.floor(Math.random() * planets.length);
+    return planets[randomIndex];
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
