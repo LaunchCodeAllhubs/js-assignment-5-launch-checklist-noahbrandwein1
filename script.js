@@ -63,6 +63,13 @@ window.addEventListener("load", function () {
             fuelStatus.innerHTML = 'Fuel level high enough for launch';
             cargoStatus.innerHTML = 'Cargo mass low enough for launch';
         }
+
+        if (pilotValidation === 'Not a Number' || coPilotValidation === 'Not a Number' ||
+            fuelValidation !== 'Is a Number' || cargoValidation !== 'Is a Number') {
+            // Alerts and shuttle status updates are handled above
+        } else {
+            formSubmission(document, pilotName, coPilotName, fuelLevel, cargoMass);
+        }
     })
 
     function pickPlanet(planets) {

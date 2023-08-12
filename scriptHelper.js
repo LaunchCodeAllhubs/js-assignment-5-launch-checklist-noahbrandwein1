@@ -40,9 +40,8 @@ function formSubmission(document, list, pilot, coPilot, fuelLevel, cargoLevel) {
             const shuttleStatus = document.querySelector('#launchStatus');
             shuttleStatus.innerHTML = 'Shuttle not ready for launch';
             shuttleStatus.style.color = 'red';
-            // Update other status elements
         } else {
-            // Update shuttle requirements for successful launch
+            
         }
     }
 
