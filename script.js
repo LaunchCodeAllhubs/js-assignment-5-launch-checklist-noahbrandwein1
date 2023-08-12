@@ -25,18 +25,24 @@ window.addEventListener("load", function () {
         event.preventDefault();
 
         const pilotName = document.querySelector('#pilotName').value;
-        const coPilotName = document.querySelector('#copilotName').value;
-        const fuelLevel = document.querySelector('#fuelLevel').value;
-        const cargoMass = document.querySelector('#cargoMass').value;
+        const coPilotName = document.querySelector('[name="copilotName"]').value;
+        const fuelLevel = document.querySelector('[name= "fuelLevel"]').value;
+        const cargoMass = document.querySelector('[name= "cargoMass"]').value;
 
         if (pilotName === '' || coPilotName === '' || fuelLevel === '' || cargoMass === '') {
             alert('All fields are required!');
             return;
         }
 
-        if (!isNaN(pilotName) || !isNaN(coPilotName) || isNaN(fuelLevel) || isNaN(cargoMass)) {
-            alert('Please enter valid information for all field.');
-            return;
+        const pilotValidation = validateInput(pilotName);
+        const coPilotValidation = validateInput(coPilotName);
+        const fuelValidation = validateInput(fuelLevel);
+        const cargoValidation = validateInput(cargoMass);
+
+        if (pilotValidation !== 'Is a Number' && coPilotValidation !== 'Is a Number' &&
+            fuelValidation !== 'Not a Number' && cargoValidation !== 'Not a Number') {
+        } else {
+            alert('Please enter valid information for all fields.');
         }
 
         const shuttleStatus = document.querySelector('#shuttleStatus');
@@ -61,7 +67,7 @@ window.addEventListener("load", function () {
 
     function pickPlanet(planets) {
         const missionTarget = document.querySelector('#missionTarget');
-        
+
         const randomIndex = Math.floor(Math.random() * planets.length);
         const selectedPlanet = planets[randomIndex];
 
