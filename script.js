@@ -6,23 +6,16 @@ window.addEventListener("load", function () {
 
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    const listedPlanetsResponse = myFetch();
+    let listedPlanetsResponse = myFetch();
     listedPlanetsResponse.then(function (result) {
         listedPlanets = result;
         console.log(listedPlanets);
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
-        const selectedPlanet = pickPlanet(listedPlanets);
-        addDestinationInfo(
-            document,
-            selectedPlanet.name,
-            selectedPlanet.diameter,
-            selectedPlanet.star,
-            selectedPlanet.distance,
-            selectedPlanet.moons,
-            selectedPlanet.image
-        );
+        const randomPlanet = pickPlanet(listedPlanets);
+        addDestinationInfo(document, randomPlanet.name, randomPlanet.diameter, randomPlanet.star, randomPlanet.distance, randomPlanet.moons, randomPlanet.image);
     });
-})
+
+});
 
 const launchForm = document.querySelector('#launchForm');
 const shuttleStatus = document.querySelector('#launchStatus');
@@ -44,6 +37,8 @@ launchForm.addEventListener('submit', function (event) {
         return;
     }
 
+    //validation
+
     const pilotValidation = validateInput(pilotName);
     const coPilotValidation = validateInput(coPilotName);
     const fuelValidation = validateInput(fuelLevel);
@@ -51,20 +46,14 @@ launchForm.addEventListener('submit', function (event) {
 
     if (pilotValidation !== 'Is a Number' && coPilotValidation !== 'Is a Number' &&
         fuelValidation !== 'Not a Number' && cargoValidation !== 'Not a Number') {
-    } else {
-        alert('Please enter valid information for all fields.');
-    }
-
-    const shuttleStatus = document.querySelector('#shuttleStatus');
-    const launchStatus = document.querySelector('#launchStatus');
-
+    // Update shuttle requirements based on validation and conditions
     if (fuelLevel < 10000 || cargoMass > 10000) {
         shuttleStatus.innerHTML = 'Shuttle not ready for launch';
         shuttleStatus.style.color = 'red';
-        pilotStatus.innerHTML = 'Pilot ${pilotName} Ready';
-        copilotStatus.innerHTML = 'Co-pilot ${coPilotName} Ready';
-        fuelStatus.innerHTML = 'Fuel level high enough for launch';
-        cargoStatus.innerHTML = 'Cargo mass low enough for launch';
+        pilotStatus.innerHTML = `Pilot ${pilotName} Ready`;
+        copilotStatus.innerHTML = `Co-pilot ${coPilotName} Ready`;
+        fuelStatus.innerHTML = 'Fuel level too low for launch';
+        cargoStatus.innerHTML = 'Cargo mass too high for launch';
 
         faultyItems.style.visibility = 'visible';
 
@@ -76,8 +65,7 @@ launchForm.addEventListener('submit', function (event) {
             cargoStatus.innerHTML = 'Cargo mass too high for launch';
         }
 
-        faultyItems.style.color = '#C7254E'
-
+        faultyItems.style.color = '#C7254E';
     } else {
         shuttleStatus.innerHTML = 'Shuttle is ready for launch';
         shuttleStatus.style.color = '#419F6A';
@@ -88,14 +76,11 @@ launchForm.addEventListener('submit', function (event) {
 
         faultyItems.style.visibility = 'hidden';
     }
-
-    if (pilotValidation === 'Not a Number' || coPilotValidation === 'Not a Number' ||
-        fuelValidation !== 'Is a Number' || cargoValidation !== 'Is a Number') {
+} else {
+    alert('Please enter valid information for all fields.');
+}
+});
         // Alerts and shuttle status updates are handled above
-    } else {
-        formSubmission(document, pilotName, coPilotName, fuelLevel, cargoMass);
-    }
-})
 
 function pickPlanet(planets) {
     const missionTarget = document.querySelector('#missionTarget');
