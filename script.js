@@ -1,14 +1,14 @@
 // Write your JavaScript code here!
 
+const { myFetch } = require("./scriptHelper");
+
 window.addEventListener("load", function () {
 
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    let listedPlanetsResponse;
+    const listedPlanetsResponse = myFetch();
     listedPlanetsResponse.then(function (result) {
         listedPlanets = result;
-        console.log(listedPlanets);
-    }).then(function () {
         console.log(listedPlanets);
         // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
         pickPlanet(listedPlantets);
@@ -51,17 +51,32 @@ window.addEventListener("load", function () {
         if (fuelLevel < 10000 || cargoMass > 10000) {
             shuttleStatus.innerHTML = 'Shuttle not ready for launch';
             shuttleStatus.style.color = 'red';
-            pilotStatus.innerHTML = 'Pilot Ready';
-            copilotStatus.innerHTML = 'Co-pilot Ready';
+            pilotStatus.innerHTML = 'Pilot ${pilotName} Ready';
+            copilotStatus.innerHTML = 'Co-pilot ${coPilotName} Ready';
             fuelStatus.innerHTML = 'Fuel level high enough for launch';
             cargoStatus.innerHTML = 'Cargo mass low enough for launch';
+
+            faultyItems.style.visibility = 'visible';
+
+            if (fuelLevel < 10000) {
+                fuelStatus.innerHTML = 'Fuel level too low for launch';
+            }
+        
+            if (cargoMass > 10000) {
+                cargoStatus.innerHTML = 'Cargo mass too high for launch';
+            }
+        
+            faultyItems.style.color = '#C7254E'
+
         } else {
             shuttleStatus.innerHTML = 'Shuttle is ready for launch';
-            shuttleStatus.style.color = 'green';
+            shuttleStatus.style.color = '#419F6A';
             pilotStatus.innerHTML = `Pilot ${pilotName} Ready`;
             copilotStatus.innerHTML = `Co-pilot ${coPilotName} Ready`;
             fuelStatus.innerHTML = 'Fuel level high enough for launch';
             cargoStatus.innerHTML = 'Cargo mass low enough for launch';
+
+            faultyItems.style.visibility = 'hidden';
         }
 
         if (pilotValidation === 'Not a Number' || coPilotValidation === 'Not a Number' ||
