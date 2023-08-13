@@ -14,20 +14,29 @@ window.addEventListener("load", function () {
         addDestinationInfo(document, selectedPlanet.name, selectedPlanet.diameter, selectedPlanet.star, selectedPlanet.distance, selectedPlanet.moons, selectedPlanet.image);
 
     });
+    let list = this.document.getElementById("faulty items");
+    list.style.visibilty = "hidden";
+    let form = document.querySelector("form");
 
-    document.getElementById("formSubmit").addEventListener("click", function (event) {
+    form.addEventListener("submit" , function(event){
         event.preventDefault();
 
-        const pilotName = document.querySelector("input[name='pilotName']").value;
-        const copilotName = document.querySelector("input[name='copilotName']").value;
-        const fuelLevel = document.querySelector("input[name='fuelLevel']").value;
-        const cargoMass = document.querySelector("input[name='cargoMass']").value;
 
-        if (pilotName === "" || copilotName === "" || fuelLevel === "" || cargoMass === "") {
-            alert("All fields are required!");
-            return;
 
-        }
+        let pilotName = document.querySelector("input[name='pilotName']");
+        let pilot = pilotInput.value;
+        let copilotName = document.querySelector("input[name='copilotName']");
+        let copilot = copilotInput.value;
+        let fuelInput = document.querySelector("input[name='fuelLevel']");
+        let fuelLevel = Number(fuelInput.value);
+        let cargoInput = document.querySelector("input[name='cargoMass']");
+        let cargoMass = Number(cargoInput.value);
+
+        //if (pilotName === "" || copilotName === "" || fuelLevel === "" || cargoMass === "") {
+          //  alert("All fields are required!");
+           // return;
+
+       // }
 
         formSubmission(document, listedPlanets, pilotName, copilotName, fuelLevel, cargoMass);
 
