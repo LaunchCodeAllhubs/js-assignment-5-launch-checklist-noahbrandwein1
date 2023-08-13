@@ -1,6 +1,6 @@
 // Write your JavaScript code here!
 
-import { myFetch, addDestinationInfo } from "./scriptHelper";
+const { myFetch, addDestinationInfo } = require("./scriptHelper");
 
 window.addEventListener("load", function () {
 
